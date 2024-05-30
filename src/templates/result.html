@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classification Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Classification Result</h1>
+    <ul>
+        {% for res in result %}
+        <li>{{ res }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Go back</a>
+</body>
+</html>

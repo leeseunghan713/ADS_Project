@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Classification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Video Classification</h1>
+    <form action="{{ url_for('classify_video') }}" method="post" enctype="multipart/form-data">
+        <br>
+        <label for="video">Upload Video:</label>
+        <input type="file" id="video" name="video" required>
+        <br>
+        <button type="submit">Classify Video</button>
+    </form>
+</body>
+</html>
