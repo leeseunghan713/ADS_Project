@@ -67,6 +67,20 @@ class VideoDataset(Dataset):
     
 #     return frames  # 변환된 프레임 배열 반환
 
+def slice_video_from_frames(frames, interval=30, duration=135):
+    slices = []
+    total_frames = len(frames)
+
+    for start in range(0, total_frames, interval):
+        end = start + duration
+        if end <= total_frames:
+            slice_frames = frames[start:end]
+        else:
+            break
+        slices.append(slice_frames)
+    
+    return slices
+
 # 인풋 값이 135프레임의 이미지? 05월 30일 10시 21분 test => 성공
 def load_single_video(frames, num_frames=135):
     processed_frames = []

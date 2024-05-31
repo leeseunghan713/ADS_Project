@@ -114,6 +114,7 @@ def index():
     메모리에서 처리하는 방식
     5월 30일 15시 43분 성공
 '''
+
 @app.route('/classify', methods=['POST'])
 def classify_video():
     if 'video' not in request.files:
@@ -137,14 +138,14 @@ def classify_video():
         '''
             여기에 영상 잘라서 배열로 return 해주는 함수 넣어주면 될듯
         '''
-        # my_array = [frames, frames, frames, frames, frames]
-        my_array = [frames]
+        my_array = video.slice_video_from_frames(frames)
 
         # 인덱스 초기화
         index = 0
         result = []
 
         start_time = datetime.now()
+
         while index < len(my_array):
             result.append(classify(my_array[index]))
             index += 1
@@ -154,6 +155,7 @@ def classify_video():
         print(result)
         
         return render_template('result.html', result=result)
+        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

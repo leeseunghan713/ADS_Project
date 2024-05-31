@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF 변환 프로그램</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h3>방채담걸리겠담</h3>
+    </div>
+    <div class="container">
+        <div class="pdf-converter">
+            <img src="{{ url_for('static', filename='pdf-icon.png') }}" alt="PDF Icon">
+            <h1>PDF 변환 프로그램</h1>
+            <form action="{{ url_for('convert_pdf') }}" method="post" enctype="multipart/form-data">
+                <label for="file-upload" class="file-select">파일 선택</label>
+                <input type="file" id="file-upload" name="file" required style="display: none;">
+                <p>또는 파일을 여기로 끌어 놓으세요</p>
+                <button type="submit">Convert PDF</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

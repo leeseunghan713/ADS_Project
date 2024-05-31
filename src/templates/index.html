@@ -4,15 +4,104 @@
     <meta charset="UTF-8">
     <title>Video Classification</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .drop-zone {
+            width: 100%;
+            max-width: 600px; /* Increased max-width for a larger drop zone */
+            height: 200px;    /* Added height to make the drop zone taller */
+            margin: 40px auto; /* Increased margin for better spacing */
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease; /* Smooth transition for background color */
+        }
+        .drop-zone.dragover {
+            background-color: #f0f0f0;
+        }
+        .drop-zone span {
+            color: #888; /* Lighter color for better visibility */
+        }
+        .button-container {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Video Classification</h1>
-    <form action="{{ url_for('classify_video') }}" method="post" enctype="multipart/form-data">
+    <h1>이상행동 감지 시스템</h1>
+    <form id="upload-form" action="{{ url_for('classify_video') }}" method="post" enctype="multipart/form-data">
         <br>
-        <label for="video">Upload Video:</label>
-        <input type="file" id="video" name="video" required>
+        <input type="file" id="video" name="video" required style="display:none;">
+        <div class="drop-zone" id="drop-zone">
+            <span>파일 선택 또는 파일을 여기로 끌어 놓으세요</span>
+        </div>
         <br>
-        <button type="submit">Classify Video</button>
+        <div class="button-container">
+            <button type="submit">이상행동 감지하기</button>
+        </div>
     </form>
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('video');
+
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+
+            const files = e.dataTransfer.files;
+            if (files.length) {
+                fileInput.files = files;
+                dropZone.textContent = files[0].name;
+            }
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) {
+                dropZone.textContent = fileInput.files[0].name;
+            } else {
+                dropZone.innerHTML = '<span>Drag and drop a video file here or click to select a file</span>';
+            }
+        });
+    </script>
 </body>
 </html>
