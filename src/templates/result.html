@@ -12,6 +12,12 @@
         <li>{{ res }}</li>
         {% endfor %}
     </ul>
+    {% if image_path %}
+    <h2>Captured Image</h2>
+    <img src="{{ url_for('send_image', filename=image_path) }}" alt="Captured Image">
+    {% else %}
+    <p>No image captured.</p>
+    {% endif %}
     <a href="{{ url_for('index') }}">Go back</a>
 </body>
 </html>

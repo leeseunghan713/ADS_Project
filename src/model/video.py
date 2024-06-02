@@ -36,51 +36,6 @@ class VideoDataset(Dataset):
 
         return frames, self.labels[idx]
 
-# # 단일 비디오 파일 로딩 함수
-# def load_single_video(input_path, frame_size=(224, 224), num_frames=135):
-#     # 비디오 파일을 읽기 위해 cv2.VideoCapture 객체 생성
-#     cap = cv2.VideoCapture(input_path)
-#     frames = []
-    
-#     # 필요한 프레임 수(num_frames)만큼 프레임을 읽어 리스트에 추가
-#     while len(frames) < num_frames:
-#         ret, frame = cap.read()
-#         if not ret:  # 프레임을 더 이상 읽을 수 없으면 반복 종료
-#             break
-#         # 프레임 크기를 frame_size로 조정
-#         frame = cv2.resize(frame, frame_size)
-#         # 프레임 색상 공간을 BGR에서 RGB로 변환
-#         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-#         frames.append(frame)
-    
-#     # 비디오 캡처 객체 해제
-#     cap.release()
-    
-#     # 비디오가 필요한 프레임 수보다 짧으면, 부족한 프레임 수만큼 0으로 채워서 리스트에 추가
-#     while len(frames) < num_frames:
-#         frames.append(np.zeros((frame_size[1], frame_size[0], 3), dtype=np.float32))
-    
-#     # 프레임 리스트를 numpy 배열로 변환
-#     frames = np.array(frames)
-#     # 배열의 차원을 (C, D, H, W) 형태로 변경
-#     frames = np.transpose(frames, (3, 0, 1, 2))  # (Channels, Depth, Height, Width)
-    
-#     return frames  # 변환된 프레임 배열 반환
-
-def slice_video_from_frames(frames, interval=30, duration=135):
-    slices = []
-    total_frames = len(frames)
-
-    for start in range(0, total_frames, interval):
-        end = start + duration
-        if end <= total_frames:
-            slice_frames = frames[start:end]
-        else:
-            break
-        slices.append(slice_frames)
-    
-    return slices
-
 # 인풋 값이 135프레임의 이미지? 05월 30일 10시 21분 test => 성공
 def load_single_video(frames, num_frames=135):
     processed_frames = []

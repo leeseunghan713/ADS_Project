@@ -1,1 +1,3 @@
 src/model/resnet200_model.pt
+yolov5s.pt
+static/images/
