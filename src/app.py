@@ -29,15 +29,13 @@ def classify_video():
     
     video_file = request.files['video']
 
+    ## 임시파일로 저장하여 사용
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_file.write(video_file.read())
         temp_file_path = temp_file.name
 
-    print(video_file)
-
     try:
         frames = process_video(temp_file_path)
-        print(f"Extracted {len(frames)} frames")
 
         if len(frames) == 0:
             return jsonify({'error': 'No frames extracted from video'}), 400
@@ -57,7 +55,6 @@ def classify_video():
             if capture is not None:
                 filename = f"captured_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
                 image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                print("경로", image_path)
                 cv2.imwrite(image_path, capture)
                 image_path = os.path.join('images', filename) 
         
