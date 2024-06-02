@@ -1,3 +1,4 @@
 src/model/resnet200_model.pt
 yolov5s.pt
 static/images/
+src/static/images/captured_20240603_003609.jpg
