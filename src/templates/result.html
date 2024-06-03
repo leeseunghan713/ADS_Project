@@ -35,7 +35,7 @@
                 <img src="{{ url_for('send_image', filename=image_path) }}" alt="Theft Image" height="720"
                     class="w-auto h-720 max-w-full rounded-lg overflow-hidden object-contain bg-gray-950" />
                 {% else %}
-                <img src="/placeholder.svg" alt="Report Image" height="720"
+                <img src="{{ url_for('send_image', filename=image_path) }}" alt="Report Image" height="720"
                     class="w-auto h-720 max-w-full rounded-lg overflow-hidden object-contain bg-gray-950" />
                 {% endif %}
             </div>

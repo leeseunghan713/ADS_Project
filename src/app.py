@@ -49,7 +49,7 @@ def classify_video():
         results.append(result)
 
         image_path = None
-        if result:
+        if results[0]:
             ## 이미지 캡처
             capture = capture_frame(temp_file_path)
             if capture is not None:
@@ -57,8 +57,13 @@ def classify_video():
                 image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 cv2.imwrite(image_path, capture)
                 image_path = os.path.join('images', filename) 
+                return render_template('result.html', result=results, image_path=filename)
+        else:
+            print(results[0])
+            return render_template('result.html', result=results, image_path="normal_picture.jpg")
+            
         
-        return render_template('result.html', result=results, image_path=filename)
+        
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
