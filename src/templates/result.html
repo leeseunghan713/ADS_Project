@@ -38,13 +38,13 @@
             </div>
             <div class="flex justify-center items-center">
                 {% if image_path %}
-                <img src="{{ url_for('send_image', filename=image_path) }}" alt="Theft Image" width="500" height="400"
+                <img src="{{ url_for('send_image', filename=image_path) }}" alt="Theft Image" width="1000" height="1000"
                     class="w-full max-w-md rounded-lg overflow-hidden object-contain bg-gray-950"
-                    style="aspect-ratio: 500 / 400; object-fit: cover;" />
+                    style="aspect-ratio: 1000 / 1000; object-fit: cover;" />
                 {% else %}
-                <img src="/placeholder.svg" alt="Report Image" width="500" height="400"
+                <img src="/placeholder.svg" alt="Report Image" width="1000" height="1000"
                     class="w-full max-w-md rounded-lg overflow-hidden object-contain bg-gray-950"
-                    style="aspect-ratio: 500 / 400; object-fit: cover;" />
+                    style="aspect-ratio: 1000 / 1000; object-fit: cover;" />
                 {% endif %}
             </div>
         </main>
