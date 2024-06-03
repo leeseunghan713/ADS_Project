@@ -1,16 +1,10 @@
-<!--
-// v0 by Vercel.
-// https://v0.dev/t/z1u2hYHvd71
--->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Video Classification Result</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-
 <body class="bg-gray-900 text-gray-50 min-h-screen flex flex-col">
     <div class="flex-1">
         <header class="py-8 px-4 md:px-6 border-b border-gray-800">
@@ -19,7 +13,7 @@
         <main class="flex-1 grid md:grid-cols-2 gap-8 p-4 md:p-6">
             <div class="space-y-6">
                 {% for res in result %}
-                <h2 class="text-xl md:text-2xl font-bold">Result : {{ res }}</h2>
+                <h2 class="text-xl md:text-2xl font-bold">{{ res }}</h2>
                 {% endfor %}
 
                 <p class="text-gray-400 leading-relaxed">
@@ -38,13 +32,11 @@
             </div>
             <div class="flex justify-center items-center">
                 {% if image_path %}
-                <img src="{{ url_for('send_image', filename=image_path) }}" alt="Theft Image" width="500" height="400"
-                    class="w-full max-w-md rounded-lg overflow-hidden object-contain bg-gray-950"
-                    style="aspect-ratio: 500 / 400; object-fit: cover;" />
+                <img src="{{ url_for('send_image', filename=image_path) }}" alt="Theft Image" height="720"
+                    class="w-auto h-720 max-w-full rounded-lg overflow-hidden object-contain bg-gray-950" />
                 {% else %}
-                <img src="/placeholder.svg" alt="Report Image" width="500" height="400"
-                    class="w-full max-w-md rounded-lg overflow-hidden object-contain bg-gray-950"
-                    style="aspect-ratio: 500 / 400; object-fit: cover;" />
+                <img src="/placeholder.svg" alt="Report Image" height="720"
+                    class="w-auto h-720 max-w-full rounded-lg overflow-hidden object-contain bg-gray-950" />
                 {% endif %}
             </div>
         </main>
@@ -61,5 +53,4 @@
         </a>
     </footer>
 </body>
-
 </html>
